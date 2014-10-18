@@ -96,9 +96,12 @@ function initGoogleMap() {
 	      content: "<div class='iwContent'>"+address+"</div>"
 	});
 	google.maps.event.addListener(marker, 'click', function() {
+	    window.location = "http://local.wordpress.dev/blog";
+	});
+	google.maps.event.addListener(marker, 'mouseover', function() {
 	    infowindow.open(map,marker);
-	  });
-	
+	});
+		
 	
 	bounds = new google.maps.LatLngBounds(
 	  new google.maps.LatLng(-84.999999, -179.999999), 
@@ -124,6 +127,7 @@ google.maps.event.addDomListener(window, 'load', getGeocode);
 
 </script>
 <script>
+
 	$('#field_1_5,#field_1_2').wrapAll('<div class="row">');
 	$('#field_1_3,#field_1_4').wrapAll('<div class="row">');
 	$('.ginput_container').children().removeClass('medium');

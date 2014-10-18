@@ -9,3 +9,5 @@ assets/js/vendor/modernizr.min.js
 assets/manifest.json
 
 *.sublime-workspace
+
+*.sublime-project

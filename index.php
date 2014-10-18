@@ -7,9 +7,28 @@
   <?php get_search_form(); ?>
 <?php endif; ?>
 
-<?php while (have_posts()) : the_post(); ?>
-  <?php get_template_part('templates/content', get_post_format()); ?>
-<?php endwhile; ?>
+<?php $i=0; ?>
+<div class="container">
+  <?php while (have_posts()) : the_post(); ?>
+
+    <?php if($i==0){ ?>
+        <div class='col-sm-12 col-xs-12' style="margin-bottom:8px;">
+          <div class='article-container'>
+            <?php get_template_part('templates/content', get_post_format()); ?>
+          </div>
+        </div>
+
+    <?php } else { ?>
+
+      <div class='col-sm-6 col-xs-12 article-container'>
+        <?php get_template_part('templates/content', get_post_format()); ?>
+      </div>
+
+    <?php } 
+    $i++; ?>
+
+  <?php endwhile; ?>
+</div>
 
 <?php if ($wp_query->max_num_pages > 1) : ?>
   <nav class="post-nav">
