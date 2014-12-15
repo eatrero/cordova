@@ -8,7 +8,12 @@
     display:inline-block;
     position: relative;
 }
-.lead-image-container:after {
+.lead-image-container2 {
+  position: relative;
+}
+
+.lead-image-container:after,
+.lead-image-container2:after {
     content:'';
     top: 0;
     left: 0;
@@ -21,7 +26,8 @@
     opacity: 0.15;
   -webkit-transition: all 0.7s ease;
 }
-.lead-image-container:hover:after {
+.lead-image-container:hover:after,
+.lead-image-container2:hover:after {
     opacity: 0;
     display: none;
 }
@@ -45,7 +51,7 @@
 .img-center {
   display: block;
   margin-left: auto;
-  margin-right: auto 
+  margin-right: auto
 }
 
 figcaption {
@@ -78,7 +84,7 @@ h2.entry-title {
 
 .article-container {
   margin-bottom: 8px;
-} 
+}
 
 .blog-article {
   background-color: white;
@@ -86,30 +92,40 @@ h2.entry-title {
 }
 
 .blog-images {
-  padding: 10px 0 10px 0; 
+  padding: 10px 0 10px 0;
 }
 
 figure.lead-image-container figcaption::before,
-figure.lead-image-container figcaption::after {
+figure.lead-image-container figcaption::after,
+figure.lead-image-container2 figcaption::before,
+figure.lead-image-container2 figcaption::after {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  bottom: 30px;
-  left: 30px;
+  top: 5%;
+  right: 5%;
+  bottom: 5%;
+  left: 5%;
   content: '';
   opacity: 0;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
 }
 
-figure.lead-image-container figcaption::before {
+figure.lead-image-container2 figcaption::before,
+figure.lead-image-container2 figcaption::after {
+  top: 20%;
+  bottom: 20%;
+}
+
+figure.lead-image-container figcaption::before,
+figure.lead-image-container2 figcaption::before {
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
   -webkit-transform: scale(0,1);
   transform: scale(0,1);
 }
 
-figure.lead-image-container figcaption::after {
+figure.lead-image-container figcaption::after,
+figure.lead-image-container2 figcaption::after {
   border-right: 1px solid #fff;
   border-left: 1px solid #fff;
   -webkit-transform: scale(1,0);
@@ -117,7 +133,9 @@ figure.lead-image-container figcaption::after {
 }
 
 figure.lead-image-container:hover figcaption::before,
-figure.lead-image-container:hover figcaption::after {
+figure.lead-image-container2:hover figcaption::before,
+figure.lead-image-container:hover figcaption::after,
+figure.lead-image-container2:hover figcaption::after {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);
@@ -129,7 +147,11 @@ figcaption {
   left: 0;
   width: 100%;
   height: 100%;
-  
+
+}
+
+figcaption.about-nathan {
+  padding-top: 130px;
 }
 
 figure.lead-image-container h2{
@@ -137,13 +159,22 @@ figure.lead-image-container h2{
   transform: translate3d(0,-20px,0);
 }
 
+figure.lead-image-container2 h2{
+  padding-top: 27%;
+  transform: translate3d(0,-20px,0);
+}
+
 @media (min-width: 990px) {
   figcaption {
-    padding: 60px;
+    padding: 40px;
   }
   figure.lead-image-container h2 {
     padding-top:25%;
     font-size: 24px;
+  }
+  figure.lead-image-container2 h2 {
+    padding-top:40%;
+    font-size: 16px;
   }
 }
 @media (min-width: 768px) and (max-width: 990px){
@@ -151,6 +182,10 @@ figure.lead-image-container h2{
     padding: 40px;
   }
   figure.lead-image-container h2 {
+    padding-top:25%;
+    font-size: 20px;
+  }
+  figure.lead-image-container2 h2 {
     padding-top:25%;
     font-size: 20px;
   }
@@ -163,5 +198,74 @@ figure.lead-image-container h2{
     padding-top:25%;
     font-size: 18px;
   }
+  figure.lead-image-container2 h2  {
+    padding-top:50%;
+    font-size: 18px;
+  }
+  figure {
+    margin-bottom: 10px;
+  }
 
+}
+
+.post-nav {
+  margin-bottom: 30px;
+}
+
+h1.post-title {
+  text-transform: uppercase;
+  text-align:     center;
+  margin-bottom:  5px;
+}
+
+.post-date {
+  text-transform: uppercase;
+  text-align:     center;
+  font-family:    "Gibson-Light", "proxima-nova-sc-osf", Helvetica, Arial;
+  display:        block;
+}
+
+.post-header {
+  margin-bottom:  20px;
+}
+.entry-content {
+  font-family: 'Gibson-Light';
+  font-size: 1.0em;
+}
+@media (min-width: 1200px) {
+  .entry-content {
+    font-size: 1.3em;
+  }
+}
+
+figure.lead-image-container h3 {
+  padding-top: 15%;
+  font-size: 15px;
+}
+
+
+@media (min-width: 768px){
+  .blog-thumb-left,
+  .blog-thumb-right {
+    width: 99.2%;
+  }
+
+  .blog-thumb-right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  .portfolio-thumb {
+    width: 98%;
+  }
+}
+
+.previous-link {
+  display: inline-block;
+  text-align: left;
+}
+
+.next-link {
+  display: inline-block;
+  text-align: right;
 }

@@ -19,17 +19,31 @@ module.exports = function(grunt) {
     'assets/vendor/bootstrap/js/tab.js',
     'assets/vendor/bootstrap/js/affix.js',
     'assets/js/plugins/*.js',
-    'assets/js/_*.js'
+    'assets/js/vendor/*.js',
+    'assets/js/_main.js'
   ];
 
+  var cssFileList = [
+
+    ];
   grunt.initConfig({
+    imagemin: {                          // Task
+      dynamic: {                         // Another target
+        files: [{
+          expand: true,                  // Enable dynamic expansion
+          cwd: 'assets/img/engagement/src/',                   // Src matches are relative to this path
+          src: ['**/*.{png,jpg,gif,JPG}'],   // Actual patterns to match
+          dest: 'assets/img/engagement/optimized/'                  // Destination path prefix
+        }]
+      }
+    },
     jshint: {
       options: {
         jshintrc: '.jshintrc'
       },
       all: [
         'Gruntfile.js',
-        'assets/js/*.js',
+        'assets/js/_*.js',
         '!assets/js/scripts.js',
         '!assets/**/*.min.*'
       ]
@@ -123,6 +137,12 @@ module.exports = function(grunt) {
         }
       }
     },
+    browserify: {
+      js: {
+        src: 'assets/js/_footer.js',
+        dest: 'assets/js/footer.js'
+      }
+    },
     watch: {
       less: {
         files: [
@@ -150,6 +170,7 @@ module.exports = function(grunt) {
         files: [
           'assets/css/main.css',
           'assets/js/scripts.js',
+          'lib/*.php',
           'templates/*.php',
           '*.php'
         ]
@@ -157,16 +178,20 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+
   // Register tasks
   grunt.registerTask('default', [
     'dev'
   ]);
   grunt.registerTask('dev', [
     'jshint',
+    'browserify',
     'less:dev',
     'autoprefixer:dev',
     'concat',
-    'watch'
+    'watch',
   ]);
   grunt.registerTask('build', [
     'jshint',

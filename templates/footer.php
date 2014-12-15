@@ -3,153 +3,143 @@
     <?php dynamic_sidebar('sidebar-footer'); ?>
     <section>
     	<div class="row">
-	    	<div class="col-sm-6 col-md-4 col-xs-12 hidden-xs hidden-sm">
-		    	<h2> My about footer, yo.	</h2>
-		    	<img class="img-center" src="http://placekitten.com/g/250/250" />
-	    	</div>
 
 	    	<div class="col-sm-6 col-md-4 col-xs-12 hidden-xs hidden-sm">
-		    	<h2> Posts.	</h2>
-		    	<p> Brooklyn nulla ut Etsy, mollit eu Intelligentsia mumblecore street art actually hashtag hella dolor Godard irure. Single-origin coffee letterpress photo booth banjo selfies Tumblr, Tonx skateboard commodo. Fanny pack kitsch ea Thundercats. Roof party Austin esse, you probably haven't heard of them labore quinoa consequat. Do placeat et, deserunt next level hella post-ironic dolore meh ex qui sunt freegan +1 voluptate. Kogi normcore ullamco do art party synth, excepteur pork belly farm-to-table odio raw denim. Pug excepteur selvage actually, street art lomo nostrud.</p>
+	    	  <article class="col-sm-11">
+  		    	<h3 class="h3-span"> Recent Posts	</h3>
+  		    	<hr class="hr-footer">
+  		    	<ul class="post-ul">
+  		    	<?php $recent_posts = cordova_get_recent_posts(); ?>
+            <?php
+              foreach ( $recent_posts as $post ) :
+            ?>
+              <li class="post-li"><a href="<?php echo $post['url']; ?>"><?php echo $post['title']; ?></a></li>
+            <?php endforeach;
+            ?>
+            </ul>
+  		    	<hr class="hr-footer">
+	  	    </article>
 	    	</div>
+
+	    	<div class="col-sm-6 col-md-4 col-xs-12 instagram-footer">
+		    	<h3 class="h3-span"> Instagram	</h3>
+		    	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+  		    	<p class='result'></p>
+		    	</div>
+	    	</div>
+
+	    	<hr class="style-two visible-xs seperator-xs">
 
 	    	<div class="col-sm-6 col-md-4 col-xs-12">
-		    	<h3> Contact.</h3>
-		    	<?php gravity_form(1, false, false, false, '', true); ?>
+		    	<h3 class="h3-span"> Contact Nathan</h3>
+ 		    	<div class="contact-form">
+  		    	<?php gravity_form(1, false, false, false, '', true); ?>
+  		    </div>
 	    	</div>
     	</div>
-
-
     </section>
 
     <div class="copyright-text">©2014 Nathan Cordova. Site Design by <a href="http://beastco.de">BEASTCODE.</a></p>
   </div>
+
 </footer>
+
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js"></script>
+<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+
+
+
+<script type="text/javascript">
+
+  var addresses = [
+  <?php
+    $locations = cordova_get_locations();
+  foreach ( $locations as $location ) :
+  ?>
+  "<?php echo $location['location']; ?>",
+<?php endforeach;
+  ?>
+];
+
+  var urls = [
+  <?php
+    foreach ( $locations as $location ) :
+  ?>
+  "<?php echo $location['url']; ?>",
+<?php endforeach;
+  ?>
+];
+
+  var	feat_images  = [
+  <?php
+    foreach ( $locations as $location ) :
+  ?>
+  "<?php echo $location['feat_image']; ?>",
+<?php endforeach;
+  ?>
+];
+</script>
+
+<script src="<?php echo get_template_directory_uri() . '/assets/js/footer.js' ?> ">
+
+<script>
+
+
+</script>
 
 <script type="text/javascript">
     // When the document is ready
     $(document).ready(function () {
+      $( ".event-datepicker" ).datepicker();
+      $( ".event-datepicker" ).datepicker();
+      $( "p.testimonial").widont();
 
-        $('.event-datepicker').datepicker({
-            format: "mm/dd/yyyy"
-        });
+      $("[id='field_1_5']","[id='field_1_2']").wrapAll('<div class="row">');
+      $("[id='field_1_3']","[id='field_1_4']").wrapAll('<div class="row">');
+      $('.ginput_container').children().removeClass('medium');
+      $("[id='field_1_5']").wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
+      $("[id='field_1_2']").wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
+      $("[id='field_1_3']").wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
+      $("[id='field_1_4']").wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
 
+      $("[id='input_1_5']").addClass('form-control');
+      $("[id='input_1_2']").addClass('form-control');
+      $("[id='input_1_3']").addClass('form-control').wrap('<p class="input-group">');
+      $("[id='input_1_3']").addClass('form-control').css('margin-top','0px');
+      $("[id='input_1_3']").addClass('form-control').css('width','100%').css('border-radius','0px');
+      $("[id='input_1_4']").addClass('form-control');
+      $("[id='input_1_3']").after('<span class="input-group-btn"><button id="cal-btn" type="button" class="btn btn-calendar event-datepicker"><i class="glyphicon glyphicon-calendar"></i></button></span>');
+      $("[id='gform_submit_button_1']").addClass('btn btn-block btn-homepage');
+
+      $('.dropdown-toggle').attr('role','button');
+
+      $('#input_1_3').attr('id','input_1_3_a');
+      $('#cal-btn').attr('id','cal-btn_a');
+
+      $("#cal-btn_a").click(function(){
+        $("#input_1_3_a").datepicker('show');
+      });
+
+      $("#cal-btn").click(function(){
+        $("#input_1_3").datepicker('show');
+      });
+
+      $('.contact-form').show();
     });
 </script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js"></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-//<![CDATA[
 
-if(document.getElementById('googleMap')){
-
-	var geocoder = new google.maps.Geocoder();
-	var address = "San Diego, CA, 92111"; //Add your address here, all on one line.
-	addresses = ["San Diego, CA 92111",
-							 "Cancun, Mexico",
-							 "Sydney, Australia"];
-
-	var latitude;
-	var longitude;
-	var color = "#85cad1"; //Set your tint color. Needs to be a hex value.
-
-	function getGeocode() {
-		geocoder.geocode( { 'address': address}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-	    		latitude = results[0].geometry.location.lat();
-				longitude = results[0].geometry.location.lng();
-				initGoogleMap();
-	    	}
-		});
-	}
-
-	function initGoogleMap() {
-		var styles = [
-		    {
-		      stylers: [
-		        { saturation: -100 }
-		      ]
-		    }
-		];
-
-		var options = {
-			mapTypeControlOptions: {
-				mapTypeIds: ['Styled']
-			},
-			center: new google.maps.LatLng(latitude, longitude),
-			zoom: 2,
-			scrollwheel: false,
-			navigationControl: false,
-			mapTypeControl: false,
-			zoomControl: true,
-			disableDefaultUI: true,
-			mapTypeId: 'Styled'
-		};
-		var div = document.getElementById('googleMap');
-		var map = new google.maps.Map(div, options);
-		marker = new google.maps.Marker({
-		    map:map,
-		    draggable:false,
-		    animation: google.maps.Animation.DROP,
-		    position: new google.maps.LatLng(latitude,longitude)
-		});
-		var styledMapType = new google.maps.StyledMapType(styles, { name: 'Styled' });
-		map.mapTypes.set('Styled', styledMapType);
-
-		var infowindow = new google.maps.InfoWindow({
-		      content: "<div class='iwContent'>"+address+"</div>"
-		});
-		google.maps.event.addListener(marker, 'click', function() {
-		    window.location = "http://local.wordpress.dev/blog";
-		});
-		google.maps.event.addListener(marker, 'mouseover', function() {
-		    infowindow.open(map,marker);
-		});
-
-
-		bounds = new google.maps.LatLngBounds(
-		  new google.maps.LatLng(-84.999999, -179.999999),
-		  new google.maps.LatLng(84.999999, 179.999999));
-
-		rect = new google.maps.Rectangle({
-		    bounds: bounds,
-		    fillColor: color,
-		    fillOpacity: 0.2,
-		    strokeWeight: 0,
-		    map: map
-		});
-
-		var listener = google.maps.event.addListener(map, "idle", function() {
-			$('#map-banner').show();
-			$("#map-header").fitText(1.2, { minFontSize: '20px', maxFontSize: '400px'});
-		  google.maps.event.removeListener(listener);
-		});
-
-	}
-	google.maps.event.addDomListener(window, 'load', getGeocode);
-//]]>
-}
-</script>
 <script>
 
-	$('#field_1_5,#field_1_2').wrapAll('<div class="row">');
-	$('#field_1_3,#field_1_4').wrapAll('<div class="row">');
-	$('.ginput_container').children().removeClass('medium');
-	$('#field_1_5').wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
-	$('#field_1_2').wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
-	$('#field_1_3').wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
-	$('#field_1_4').wrap('<div class="form-group col-md-6 col-sm-12 col-xs-6"></div>');
-
-	$('#input_1_5').addClass('form-control');
-	$('#input_1_2').addClass('form-control');
-	$('#input_1_3').addClass('form-control').wrap('<p class="input-group">');
-	$('#input_1_3').addClass('form-control').css('margin-top','0px');
-	$('#input_1_3').addClass('form-control').css('width','100%').css('border-radius','0px');
-	$('#input_1_4').addClass('form-control');
-	$('#input_1_3').after('<span class="input-group-btn"><button type="button" class="btn btn-calendar" ng-click="setEventDate($event)"><i class="glyphicon glyphicon-calendar"></i></button></span>');
-	$('#gform_submit_button_1').addClass('btn btn-block btn-homepage');
-
-  $('.dropdown-toggle').attr('role','button');
+  $.ajax({
+  type: "GET",
+  dataType: "jsonp",
+  url: "https://api.instagram.com/v1/users/1556471062/media/recent/?client_id=bf9bcae024a64386a723ee9187139ec9"
+   }). done(function( data ) {
+    var recent_post_url = data.data[0].images.standard_resolution.url;
+    console.log(data.data[0].location.name);
+//    console.log(data.data[0].images.thumbnail);
+    $(".result").html("<a href='http://instagram.com/ncordovaphoto' target='_blank'><figure class='lead-image-container2'> <img src='" + recent_post_url + "' class='img-responsive'/><figcaption><h2 class='entry-title'>" + (data.data[0].location.name  ? data.data[0].location.name  :'' ) + "</h2></figcaption></figure> </a>");
+  });
 
 </script>

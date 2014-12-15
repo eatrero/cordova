@@ -8,7 +8,7 @@
 <?php endif; ?>
 
 <?php $i=0; ?>
-<div class="container">
+<div id="content" class="container last-section">
   <?php while (have_posts()) : the_post(); ?>
 
     <?php if($i==0){ ?>
@@ -20,21 +20,34 @@
 
     <?php } else { ?>
 
-      <div class='col-sm-6 col-xs-12 article-container'>
-        <?php get_template_part('templates/content', get_post_format()); ?>
-      </div>
+    <?php if( $i%2 ){ ?>
+        <div class='col-sm-6 col-xs-12 article-container'>
+          <div class='blog-thumb-left'>
+            <?php get_template_part('templates/content', get_post_format()); ?>
+          </div>
+        </div>
+    <?php   } else { ?>
+        <div class='col-sm-6 col-xs-12 article-container'>
+          <div class='blog-thumb-right'>
+            <?php get_template_part('templates/content', get_post_format()); ?>
+          </div>
+        </div>
+    <?php   } ?>
 
-    <?php } 
+    <?php }
     $i++; ?>
 
   <?php endwhile; ?>
+
 </div>
 
+<div class="container">
 <?php if ($wp_query->max_num_pages > 1) : ?>
-  <nav class="post-nav">
-    <ul class="pager">
-      <li class="previous"><?php next_posts_link(__('&larr; Older posts', 'roots')); ?></li>
-      <li class="next"><?php previous_posts_link(__('Newer posts &rarr;', 'roots')); ?></li>
-    </ul>
-  </nav>
+    <nav class="post-nav">
+      <ul class="pager">
+        <li class="previous"><?php next_posts_link(__('&larr; Older posts', 'roots')); ?></li>
+        <li class="next"><?php previous_posts_link(__('Newer posts &rarr;', 'roots')); ?></li>
+      </ul>
+    </nav>
 <?php endif; ?>
+</div>
