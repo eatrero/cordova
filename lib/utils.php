@@ -17,7 +17,7 @@ add_filter('get_search_form', 'roots_get_search_form');
 
 
 function cordova_get_locations() {
-  $args = array( 'posts_per_page' => 20, 'offset'=> 0 );
+  $args = array( 'posts_per_page' => 200, 'offset'=> 0 );
   $locations = array();
 
   $myposts = get_posts( $args );
@@ -25,7 +25,37 @@ function cordova_get_locations() {
     setup_postdata( $post );
     $location = get_post_meta( $post->ID, 'location', true );
     $url = get_permalink( $post->ID );
-    $feat_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+    $feat_image = wp_get_attachment_thumb_url( get_post_thumbnail_id($post->ID) );
+
+    if($location) {
+      array_push($locations, array('location' => $location, 'url' => $url, 'feat_image' => $feat_image));
+    }
+  }
+  wp_reset_postdata();
+
+  $args = array(
+	'sort_order' => 'ASC',
+	'sort_column' => 'post_title',
+	'hierarchical' => 0,
+	'exclude' => '',
+	'include' => '',
+	'meta_key' => '',
+	'meta_value' => '',
+	'authors' => '',
+	'child_of' => 0,
+	'parent' => -1,
+	'exclude_tree' => '',
+	'number' => '',
+	'offset' => 0,
+	'post_type' => 'page',
+	'post_status' => 'publish');
+
+  $my_pages = get_pages($args);
+  foreach ( $my_pages as $post ) {
+    setup_postdata( $post );
+    $location = get_post_meta( $post->ID, 'location', true );
+    $url = get_permalink( $post->ID );
+    $feat_image = wp_get_attachment_thumb_url( get_post_thumbnail_id($post->ID) );
 
     if($location) {
       array_push($locations, array('location' => $location, 'url' => $url, 'feat_image' => $feat_image));
